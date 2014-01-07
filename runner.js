@@ -14,8 +14,6 @@
 	};
 
 	window.onload = function() {
-		debugger;
-
 		var code = __codeScript,
 		  codeScript = document.createElement('script'),
 		  tests = __testScript,
