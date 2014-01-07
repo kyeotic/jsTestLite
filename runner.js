@@ -16,9 +16,9 @@
 	window.onload = function() {
 		debugger;
 
-		var code = window.__codeScript,
+		var code = __codeScript,
 		  codeScript = document.createElement('script'),
-		  tests = window.__testScript,
+		  tests = __testScript,
 		  testsScript = document.createElement('script');
 
 		codeScript.type = 'text/javascript';
