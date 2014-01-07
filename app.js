@@ -9,7 +9,7 @@
 		testHost.empty().append(testFrame);
 		
 		var testFrameDoc = testFrame.contents()[0],
-			testFrameBody = testFrame.contents().find('body');
+			testFrameBody = testFrame.contents().find('body')[0];
 		
 		var code = $('#userTests').val(),
 			codeScript = testFrameDoc.createElement('script'),
