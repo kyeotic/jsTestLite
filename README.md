@@ -1,4 +1,6 @@
 jsTestLite
 ==========
 
-A a test runner for simple Jasmine tests. See it live [here](http://tyrsius.github.io/jsTestLite).
+jsFiddle for Jasmine tests. See live [here](http://tyrsius.github.io/jsTestLite).
+
+Issues and pull requests welcome.
