@@ -55,13 +55,15 @@ var app = app || {};
 			self.runTests();
 		};
 
-		self.saveContentToCookie = function() {
+		self.saveContentToCookie = function(cookieName) {
+			cookieName = cookieName || self.activeCookie();
 			//Ensure something gets written so we have a valid extraction
 			app.cookie.set(self.activeCookie(), { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, 1000);
 			app.cookie.set(app.activeCookieName, { name: self.activeCookie() }, 1000);
 		};
 
 		self.saveCookie = function() {
+			self.saveContentToCookie(self.newCookieName());
 			self.cookies.push(self.newCookieName());
 			self.activeCookie(self.newCookieName());
 			self.newCookieName('');
