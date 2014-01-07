@@ -21,21 +21,6 @@
     frame.window.eval(code);
     frame.window.eval(codetestsScript);
     frame.window.eval(codeScript);
-    
-    /*
-    codeScript.type = 'text/javascript';
-    codeScript.text = code;
-    testFrameBody.appendChild(codeScript);
-    
-    codeScript.type = 'text/javascript';
-    codeScript.text = code;
-    testFrameBody.appendChild(testsScript);
-    */
-
-    var runnerScript = testFrameDoc.createElement('script');
-    runnerScript.type = 'text/javascript';
-    runnerScript.src = 'runner.js';
-    testFrameBody.appendChild(runnerScript);
   };
   
   $('textarea').keyup(function() {
