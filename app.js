@@ -43,4 +43,14 @@
 	$('#testSmall').click(function() { setTestFrameHeight(defaults.testSmall); });
 	$('#testMedium').click(function() { setTestFrameHeight(defaults.testMedium); });
 	$('#testLarge').click(function() { setTestFrameHeight(defaults.testLarge); });
+
+	$('#codeExample').click(function() {
+	    var examples = $('#examples').contents().filter(function() { return this.nodeType === 8; }),
+	        codeExample = examples.get(0).nodeValue.trim(),
+	        testExample = examples.get(1).nodeValue.trim(); 
+	    $('#userCode').val(codeExample);
+	    $('#userTests').val(testExample); 
+	});
+
+	$('#codeClear').click(function() { $('textarea').val(''); });
 })();
