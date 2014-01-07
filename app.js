@@ -93,7 +93,7 @@ var app = app || {};
 
 	//Save should set the active cookie, save the content, add a dropdown option, and select it
 	$('#cookieSave').click(function() {
-		if ($('#cookieList').find('[value=' + activeCookie + ']').length > 0) {
+		if ($('#cookieList').find('[value=' + this.value + ']').length > 0) {
 			alert("A cookie by this name already exists");
 			return;
 		}
@@ -122,8 +122,9 @@ var app = app || {};
 
 	var saveContentToCookie = function() {
 		app.cookie.set(activeCookie, { code: $('#userCode').val(), tests: $('#userTests').val()}, 1000);
+		app.cookie.set(app.activeCookieName, activeCookie, 1000);
 	};
-	
+
 	var loadContentFromCookie = function() {
 		var cookie = app.cookie.get(activeCookie);
 		$('#userCode').val(cookie.code);
