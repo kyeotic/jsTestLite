@@ -40,7 +40,7 @@ app.cookie = (function(){
 		if (!(exclude instanceof Array))
 			exclude = [exclude];
 		for (var i = 0 ; i < cookies.length; i++) {
-			var cookie = cookies[i].split('=')[0];
+			var cookie = cookies[i].split('=')[0].trim();
 			if (exclude.indexOf(cookie) === -1)
 				result.push(cookie);
 			}						
