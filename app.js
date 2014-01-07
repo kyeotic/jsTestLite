@@ -71,6 +71,7 @@ var app = app || {};
 		var cookie = app.cookie.get(activeCookie);
 		$('#userCode').val(cookie.code);
 		$('#userTests').val(cookie.tests);
+		rerunTests();
 	};
 
 	//Bind the toggle button
@@ -88,23 +89,35 @@ var app = app || {};
 		activeCookie = cookieList[0];
 	}
 
-	//Load the cookie if present
-	if (activeCookie) {
-		loadContentFromCookie();
-	//Otherwise, make a default cookie
-	} else {
-		$('#cookieContainer').hide();
-		activeCookie = defaults.cookieName;
-		cookieList.push(activeCookie);
-		resetFields();
-	}
+	var initCookies = function() {
+		//Load the cookie if present
+		if (activeCookie) {
+			loadContentFromCookie();
+		//Otherwise, make a default cookie
+		} else {
+			$('#cookieContainer').hide();
+			activeCookie = defaults.cookieName;
+			cookieList.push(activeCookie);
+			resetFields();
+		}
 
-	//Populate the dropdown
-	if (cookieList.length > 0) {
-		$.each(cookieList, function (i, item) {
-		    $('#cookieList').append($('<option>', { value: item, text : item }));
-		});
-	}
+		//Populate the dropdown
+		if (cookieList.length > 0) {
+			$('#cookieList').empty();
+			$.each(cookieList, function (i, item) {
+			    $('#cookieList').append($('<option>', { value: item, text : item, selected: item === activeCookie }));
+			});
+		}
+	};
+
+	var resetCookiesList = function() {
+		cookieList = $('#cookieList').children().map(function(i, item) { return item.value; })
+		if (cookieList.length > 0)
+			activeCookie = cookieList[0];
+	};
+
+	//Run Init
+	initCookies();	
 
 	//Save should set the active cookie, save the content, add a dropdown option, and select it
 	$('#cookieSaveForm').submit(function(event) {
@@ -119,14 +132,15 @@ var app = app || {};
 		$('#cookieList').append($('<option>', { value: cookieName, text : cookieName }));
 		$('#.cookieList').val(activeCookie);
 
-		event.preventDefault();
+		return false;
 	});
 
 	//Delete should remove the current cookie, remove the dropdown option, and clear the fields
 	$('#cookieDelete').click(function() {
 		app.cookie.remove(activeCookie);
 		$('#cookieList').find('[value=' + activeCookie + ']').remove();
-		resetFields();
+		resetCookiesList();
+		initCookies();
 	});	
 
 	//Change should load the selected cookie
