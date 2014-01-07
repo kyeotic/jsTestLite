@@ -19,7 +19,7 @@
     testHost.empty().append(testFrame);
     setTestFrameHeight(testFrameHeight);
     
-    var code = $('#userTests').val(),
+    var code = $('#userCode').val(),
       tests = $('#userTests').val();
 
     var frame = window.frames[0];
