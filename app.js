@@ -64,7 +64,7 @@ var app = app || {};
 	//Create save and load functions
 	var saveContentToCookie = function() {
 		app.cookie.set(activeCookie, { code: $('#userCode').val(), tests: $('#userTests').val()}, 1000);
-		app.cookie.set(app.activeCookieName, activeCookie, 1000);
+		app.cookie.set(app.activeCookieName, { name: activeCookie }, 1000);
 	};
 	var loadContentFromCookie = function() {
 		var cookie = app.cookie.get(activeCookie);
@@ -78,6 +78,9 @@ var app = app || {};
 	//Retriece the cookie list, and selected cookie
 	var cookieList = app.cookie.list(app.activeCookieName),
 		activeCookie = app.cookie.get(app.activeCookieName);
+
+	if (activeCookie)
+		activeCookie = activeCookie.name;
 
 	//Select the first cookie if none is selected
 	if (!activeCookie && cookieList.length > 0) {
