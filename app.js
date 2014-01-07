@@ -80,6 +80,8 @@ var app = app || {};
 			//If that was the last cookie, make a new default one
 			if (self.cookies().length === 0)
 				self.cookies.push(defaults.cookieName);
+			else
+				self.activeCookie(self.cookies()[0]);
 		};
 
 		self.activeCookie.subscribe(function(newValue) {
@@ -111,7 +113,7 @@ var app = app || {};
 			self.cookies(app.cookie.list(app.activeCookieName));
 
 			//load the active cookie, if present
-			var activeCookie = activeCookie = app.cookie.get(app.activeCookieName);
+			var activeCookie = app.cookie.get(app.activeCookieName);
 			if (activeCookie)
 				self.activeCookie(activeCookie);
 			else
