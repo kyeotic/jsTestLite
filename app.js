@@ -80,7 +80,6 @@ var app = app || {};
 		});
 
 		var runTests = $.debounce(defaults.testDebounce, function() {
-			var testHost = ;
 			var testFrame = $('<iframe id="testFrame" src="runner.html"></iframe>');
 		
 			//Reset the test frame, using the existing height
