@@ -13,7 +13,7 @@
 		$('textarea').attr('rows', size);
 	};
 	
-	var testFrameHeight = defaults.codeSmall;
+	var testFrameHeight = defaults.testSmall;
 	var setTestFrameHeight = function(size) {
 		testFrameHeight = size;
 		$('iframe').height(size);
