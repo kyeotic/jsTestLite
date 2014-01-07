@@ -103,7 +103,7 @@ describe("Example tests", function() {
 			<div class="col-md-4">
 				<form data-bind="submit: saveCookie">
 					<label for="cookieName">New Cookie</label>
-					<input type="text" id="cookieName">
+					<input type="text" id="cookieName" data-bind="value: newCookieName">
 					<button class="btn btn-sm btn-primary" type="submit">Save</button>
 				</form>				
 			</div>
