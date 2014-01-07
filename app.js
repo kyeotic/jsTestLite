@@ -9,6 +9,9 @@
 		testDebounce: 500
 	};
 
+	//Init Tab-Override
+	$('textarea').tabOverride();
+
 	var setTextAreaRows = function(size) {
 		$('textarea').attr('rows', size);
 	};
