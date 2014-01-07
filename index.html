@@ -16,7 +16,8 @@
 	<script type="text/javascript" src="lib/jquery-throttle.js"></script>
 	<script type="text/javascript" src="lib/tab-override.js"></script>
 	<script type="text/javascript" src="lib/tab-override-jquery.js"></script>
-				
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>				
 </head>
 <body style="">
 	<div id="applicationHost" class="container">
@@ -60,30 +61,30 @@ describe("Example tests", function() {
 				<h1>
 					Code
 					<span class="pull-right">
-						<button class="btn btn-default" id="codeSmall">Small</button>
-						<button class="btn btn-default" id="codeMedium">Medium</button>
-						<button class="btn btn-default" id="codeLarge">Large</button>
+						<button class="btn btn-default" data-bind="click: setContentSmall">Small</button>
+						<button class="btn btn-default" data-bind="click: setContentMedium">Medium</button>
+						<button class="btn btn-default" data-bind="click: setContentLarge">Large</button>
 					</span>
 				</h1>
-				<textarea class="form-control" rows="10" id="userCode"></textarea>
+				<textarea class="form-control" data-bind="value: codeContent, attr: { rows: codeSize }"></textarea>
 			</div>
 			<div class="col-md-6">
 				<h1>Tests
 					<span class="pull-right">
-						<button class="btn btn-default" id="codeExample">Load Example</button>
-						<button class="btn btn-danger" id="codeClear">Clear</button>
+						<button class="btn btn-default" data-bind="click: loadExample">Load Example</button>
+						<button class="btn btn-danger" data-bind="click: clearContent">Clear</button>
 					</span>
 				</h1>
-				<textarea class="form-control" rows="10" id="userTests"></textarea>
+				<textarea class="form-control" data-bind="value: testsContent, attr: { rows: testsSize }"></textarea>
 			</div>
 		</div>
 		
 		<h1>
 			Results
 			<span class="pull-right">
-				<button class="btn btn-default" id="testSmall">Small</button>
-				<button class="btn btn-default" id="testMedium">Medium</button>
-				<button class="btn btn-default" id="testLarge">Large</button>
+				<button class="btn btn-default" data-bind="click: setResultsSmall">Small</button>
+				<button class="btn btn-default" data-bind="click: setResultsMedium">Medium</button>
+				<button class="btn btn-default" data-bind="click: setResultsLarge">Large</button>
 			</span>
 		</h1>
 		
@@ -93,23 +94,23 @@ describe("Example tests", function() {
 			<div class="col-md-12">
 				<h1>Storage
 				<span>
-				<button class="btn btn-default" id="toggleCookies">Toggle</button>
+				<button class="btn btn-default" data-bind="click: showingStorage(!showingStoring())">Toggle</button>
 				</span>
 				</h1>
 			</div>
 		</div>
-		<div class="row" id="cookieContainer">
+		<div class="row" data-bind="visible: showingStorage">
 			<div class="col-md-4">
-				<form id="cookieSaveForm">
+				<form data-bind="submit: saveCookie">
 					<label for="cookieName">New Cookie</label>
 					<input type="text" id="cookieName">
-					<button class="btn btn-sm btn-primary" type="submit" id="cookieSave">Save</button>
+					<button class="btn btn-sm btn-primary" type="submit">Save</button>
 				</form>				
 			</div>
 			<div class="col-md-4">
 					<label for="cookieList">Cookies</label>
-					<select id="cookieList"></select>
-					<button class="btn btn-sm btn-danger" id="cookieDelete">Delete</button>
+					<select id="cookieList" data-bind="options: cookies, optionsText: 'name', value: selectedCookie"></select>
+					<button class="btn btn-sm btn-danger" data-bind="click: deleteCookie">Delete</button>
 			</div>
 		</div>
 		
