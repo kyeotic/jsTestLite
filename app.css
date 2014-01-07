@@ -1,3 +1,7 @@
 iframe {
   border: none;
 }
+
+#testHost {
+  background-color: #eeeeee;
+}
