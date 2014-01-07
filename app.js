@@ -9,7 +9,7 @@
     testHost.empty().append(testFrame);
     
     var code = $('#userTests').val(),
-      tests = $('#userTests').val(),;
+      tests = $('#userTests').val();
 
     var frame = window.frames[0];
     
