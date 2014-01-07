@@ -63,7 +63,8 @@ var app = app || {};
 
 	//Create save and load functions
 	var saveContentToCookie = function() {
-		app.cookie.set(activeCookie, { code: $('#userCode').val(), tests: $('#userTests').val()}, 1000);
+		//Ensure something gets written so we have a valid extraction
+		app.cookie.set(activeCookie, { code: $('#userCode').val() || ' ', tests: $('#userTests').val() || ' ' }, 1000);
 		app.cookie.set(app.activeCookieName, { name: activeCookie }, 1000);
 	};
 	var loadContentFromCookie = function() {
