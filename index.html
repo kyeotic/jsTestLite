@@ -1,66 +1,73 @@
 <html><head>
-        <title>App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/slate/bootstrap.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        
-        <link rel="stylesheet" href="app.css">
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="lib/jquery-throttle.js"></script>
-        <script type="text/javascript" src="lib/tab-override.js"></script>
-        <script type="text/javascript" src="lib/tab-override-jquery.js"></script>
-        
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/slate/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="app.css">
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="lib/jquery-throttle.js"></script>
+	<script type="text/javascript" src="lib/tab-override.js"></script>
+	<script type="text/javascript" src="lib/tab-override-jquery.js"></script>
+				
 </head>
 <body style="">
-    <div id="applicationHost" class="container">
-    	<div class="row">
-          <div class="col-md-6">
-              <h1>
-                  Code
-                  <span class="pull-right">
-                    <button class="btn btn-default" id="codeSmall">Small</button>
-                    <button class="btn btn-default" id="codeMedium">Medium</button>
-                    <button class="btn btn-default" id="codeLarge">Large</button>
-                  </span>
-            </h1>
-            <textarea class="form-control" rows="10" id="userCode"></textarea>
-          </div>
-          <div class="col-md-6">
-            <h1>Tests</h1>
-            <textarea class="form-control" rows="10" id="userTests"></textarea>
-          </div>
-      </div>
-      
-      <h1>
-          Results
-          <span class="pull-right">
-            <button class="btn btn-default" id="testSmall">Small</button>
-              <button class="btn btn-default" id="testMedium">Medium</button>
-              <button class="btn btn-default" id="testLarge">Large</button>
-          </span>
-    </h1>
-      
-      <div id="testHost"></div>
-      
-      <div class="row">
-          <div class="col-md-12">
-              
-              <h1>How it Works</h1>
-              
-              <p>
-                  Enter your code into the code box, enter your tests into the test box. Test will run automatically as you type. If you don't know how to write Jasmine tests, check out <a href="http://pivotal.github.io/jasmine/"></a>the documentation</a>.
-              </p>
-          </div>
-      </div>
-    </div>
-    
-    <script type="text/javascript" src="app.js"></script>
+	<div id="applicationHost" class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h1>
+					Code
+					<span class="pull-right">
+						<button class="btn btn-default" id="codeSmall">Small</button>
+						<button class="btn btn-default" id="codeMedium">Medium</button>
+						<button class="btn btn-default" id="codeLarge">Large</button>
+					</span>
+				</h1>
+				<textarea class="form-control" rows="10" id="userCode"></textarea>
+			</div>
+			<div class="col-md-6">
+				<h1>Tests</h1>
+				<textarea class="form-control" rows="10" id="userTests"></textarea>
+			</div>
+		</div>
+		
+		<h1>
+			Results
+			<span class="pull-right">
+				<button class="btn btn-default" id="testSmall">Small</button>
+				<button class="btn btn-default" id="testMedium">Medium</button>
+				<button class="btn btn-default" id="testLarge">Large</button>
+			</span>
+		</h1>
+		
+		<div id="testHost"></div>
+		
+		<div class="row">
+			<div class="col-md-12">					
+				<h1>How it Works</h1>
+				
+				<p>
+					Enter your code into the code box, enter your tests into the test box. Test will run automatically as you type (on a 500ms debounce). If you don't know how to write Jasmine tests, check out <a href="http://pivotal.github.io/jasmine/"></a>the documentation</a>.
+				</p>
+
+				<p>
+					The input fields also support tab and shift-tab for indenting.
+				</p>
+
+				<p>
+					This page uses jQuery, jQuery-throttle-debounce, tab-override, Jasmine, and Twitter Bootstrap 3. This project is licensed under the MIT license.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="app.js"></script>
 </body>
 </html>

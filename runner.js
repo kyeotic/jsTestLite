@@ -15,9 +15,9 @@
 
 	window.onload = function() {
 		var code = __codeScript,
-		  codeScript = document.createElement('script'),
-		  tests = __testScript,
-		  testsScript = document.createElement('script');
+			codeScript = document.createElement('script'),
+			tests = __testScript,
+			testsScript = document.createElement('script');
 
 		codeScript.type = 'text/javascript';
 		codeScript.text = code;

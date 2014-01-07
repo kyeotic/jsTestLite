@@ -1,40 +1,43 @@
 (function() {
-  
-  
-  var setTextAreaRows = function(size) {
-  	$('textarea').attr('rows', size);
-  };
-  
-  var testFrameHeight = 160;
-  var setTestFrameHeight = function(size) {
-  	testFrameHeight = size;
-  	$('iframe').height(size);
-  };
-  
-  var testHost = $('#testHost');
-  var rerunTests = function() {
-    var testFrame = $('<iframe id="testFrame" src="runner.html"></iframe>');
-    
-    //Reset the test frame
-    testHost.empty().append(testFrame);
-    setTestFrameHeight(testFrameHeight);
-    
-    var code = $('#userCode').val(),
-      tests = $('#userTests').val();
+	var defaults = {
+		codeSmall: 13,
+		codeMedium: 21,
+		codeLarge: 30,
+		testSmall: 160,
+		testMedium: 320,
+		testLarge: 550,
+		testDebounce: 500
+	};
 
-    var frame = window.frames[0];
-    
-	frame.__codeScript = code;
-	frame.__testScript = tests;
-  };
-  
-  $('textarea').keyup($.debounce( 500, rerunTests ));
-  
-	$('#codeSmall').click(function() { setTextAreaRows(13); });
-	$('#codeMedium').click(function() { setTextAreaRows(21); });
-	$('#codeLarge').click(function() { setTextAreaRows(30); });
+	var setTextAreaRows = function(size) {
+		$('textarea').attr('rows', size);
+	};
 	
-	$('#testSmall').click(function() { setTestFrameHeight(160); });
-	$('#testMedium').click(function() { setTestFrameHeight(320); });
-	$('#testLarge').click(function() { setTestFrameHeight(550); });
+	var testFrameHeight = defaults.codeSmall;
+	var setTestFrameHeight = function(size) {
+		testFrameHeight = size;
+		$('iframe').height(size);
+	};
+	
+	var testHost = $('#testHost');
+	var rerunTests = function() {
+		var testFrame = $('<iframe id="testFrame" src="runner.html"></iframe>');
+		
+		//Reset the test frame, using the existing height
+		testHost.empty().append(testFrame);
+		setTestFrameHeight(testFrameHeight);
+
+		window.frames[0].__codeScript = $('#userCode').val();
+		window.frames[0].__testScript = $('#userTests').val();
+	};
+	
+	$('textarea').keyup($.debounce(testDebounce, rerunTests ));
+	
+	$('#codeSmall').click(function() { setTextAreaRows(defaults.codeSmall); });
+	$('#codeMedium').click(function() { setTextAreaRows(defaults.codeMedium); });
+	$('#codeLarge').click(function() { setTextAreaRows(defaults.codeLarge); });
+	
+	$('#testSmall').click(function() { setTestFrameHeight(defaults.testSmall); });
+	$('#testMedium').click(function() { setTestFrameHeight(defaults.testMedium); });
+	$('#testLarge').click(function() { setTestFrameHeight(defaults.testLarge); });
 })();
