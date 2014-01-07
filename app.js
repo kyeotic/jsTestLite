@@ -118,7 +118,7 @@ var app = app || {};
         codeExample = examples.get(0).nodeValue.trim(),
         testExample = examples.get(1).nodeValue.trim();
 
-	var vm = new ViewModel = ({
+	var vm = new ViewModel({
 		testHost: 'testHost',
 		codeExample: codeExample,
 		testsExample: testExample
