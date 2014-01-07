@@ -52,6 +52,13 @@
 	    $('#userTests').val(testExample);
 	    rerunTests();
 	});
-
-	$('#codeClear').click(function() { $('textarea').val(''); rerunTests(); });
+	
+	var resetFields = function() {
+		$('#userCode').val();
+		$('#userTests').val("describe('', function() {\n\tit('', function() {\n\t\t\n\t});\n});");
+	};
+	resetFields(); //Call it to start
+	
+	$('#codeClear').click(function() { resetFields(); rerunTests(); });
+	
 })();
