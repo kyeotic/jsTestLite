@@ -18,7 +18,16 @@
     <div id="applicationHost" class="container">
     	<div class="row">
           <div class="col-md-6">
-            <h1>Code</h1>
+            <div class="row">
+              <div class="col-md-4">
+                <h1>Code</h1>
+              </div>
+              <div class="col-md-8 text-right header-buttons">
+                <button class="btn btn-default" id="codeSmall">Small</button>
+                <button class="btn btn-default" id="codeMedium">Medium</button>
+                <button class="btn btn-default" id="codeLarge">Large</button>
+              </div>
+            </div>
             <textarea class="form-control" rows="10" id="userCode"></textarea>
           </div>
           <div class="col-md-6">
@@ -27,6 +36,16 @@
           </div>
       </div>
       
+  	  <div class="row">
+        <div class="col-md-4">
+          <h1>Results</h1>
+        </div>
+        <div class="col-md-8 text-right header-buttons">
+          <button class="btn btn-default" id="testSmall">Small</button>
+          <button class="btn btn-default" id="testMedium">Medium</button>
+          <button class="btn btn-default" id="testLarge">Large</button>
+        </div>
+      </div>
       <div id="testHost"></div>
       
       <div class="row">
