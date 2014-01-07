@@ -1,4 +1,4 @@
 jsTestLite
 ==========
 
-A simple test runner
+A a test runner for simple Jasmine tests. See live [here](http://tyrsius.github.io/jsTestLite).
