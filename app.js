@@ -75,7 +75,7 @@ var app = app || {};
 	//Bind the toggle button
 	$('#toggleCookies').click(function() { $('#cookieContainer').slideToggle(); } );
 
-	//Retriece the cookie list, and selected cookie
+	//Retrieve the cookie list, and selected cookie
 	var cookieList = app.cookie.list(app.activeCookieName),
 		activeCookie = app.cookie.get(app.activeCookieName);
 
