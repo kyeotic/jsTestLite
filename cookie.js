@@ -41,7 +41,7 @@ app.cookie = (function(){
           exclude = [exclude];
 				for (var i = 0 ; i < cookies.length; i++) {
           var cookie = cookies[i].split('=')[0];
-          if (exclude.indexOf(cookie) !== -1)
+          if (exclude.indexOf(cookie) === -1)
 					 result.push(cookie);
 				}						
 				return result;
