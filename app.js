@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function($, ko {
+(function($, ko) {
 	var defaults = {
 		codeSmall: 13,
 		codeMedium: 21,
