@@ -107,16 +107,19 @@ var app = app || {};
 	}
 
 	//Save should set the active cookie, save the content, add a dropdown option, and select it
-	$('#cookieSave').click(function() {
-		if ($('#cookieList').find('[value=' + this.value + ']').length > 0) {
+	$('#cookieSaveForm').submit(function(event) {
+		var cookieName = $('#cookieName').val();
+		if ($('#cookieList').find('[value=' + cookieName + ']').length > 0) {
 			alert("A cookie by this name already exists");
 			return;
 		}
-		activeCookie = this.value;
+		activeCookie = cookieName;
 		saveContentToCookie();
 
 		$('#cookieList').append($('<option>', { value: cookieName, text : cookieName }));
 		$('#.cookieList').val(activeCookie);
+
+		event.preventDefault();
 	});
 
 	//Delete should remove the current cookie, remove the dropdown option, and clear the fields
@@ -128,7 +131,7 @@ var app = app || {};
 
 	//Change should load the selected cookie
 	$('#cookieList').change(function() {
-		var cookieName = this.value;
+		var cookieName = $('#cookieList').val();
 		if (activeCookie === cookieName)
 			return;
 		activeCookie = cookieName;

@@ -100,9 +100,11 @@ describe("Example tests", function() {
 		</div>
 		<div class="row" id="cookieContainer">
 			<div class="col-md-4">
-				<label for="cookieName">New Cookie</label>
-				<input type="text" id="cookieName">
-				<button class="btn btn-sm btn-primary" id="cookieSave">Save</button>
+				<form id="cookieSaveForm">
+					<label for="cookieName">New Cookie</label>
+					<input type="text" id="cookieName">
+					<button class="btn btn-sm btn-primary" type="submit" id="cookieSave">Save</button>
+				</form>				
 			</div>
 			<div class="col-md-4">
 					<label for="cookieList">Cookies</label>
