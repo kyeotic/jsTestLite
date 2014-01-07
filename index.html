@@ -88,6 +88,28 @@ describe("Example tests", function() {
 		</h1>
 		
 		<div id="testHost"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Storage
+				<span>
+				<button class="btn btn-default" id="toggleCookies">Toggle</button>
+				</span>
+				</h1>
+			</div>
+		</div>
+		<div class="row" id="cookieContainer">
+			<div class="col-md-4">
+				<label for="cookieName">New Cookie</label>
+				<input type="text" id="cookieName">
+				<button class="btn btn-sm btn-primary" id="cookieSave">Save</button>
+			</div>
+			<div class="col-md-4">
+					<label for="cookieList">Cookies</label>
+					<select id="cookieList"></select>
+					<button class="btn btn-sm btn-danger" id="cookieDelete">Delete</button>
+			</div>
+		</div>
 		
 		<div class="row">
 			<div class="col-md-12">					
@@ -108,6 +130,7 @@ describe("Example tests", function() {
 		</div>
 	</div>
 
+	<script type="text/javascript" src="cookie.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </body>
 </html>
