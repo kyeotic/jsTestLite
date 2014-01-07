@@ -23,8 +23,8 @@
 		codeScript.text = code;
 		document.body.appendChild(codeScript);
 		
-		codeScript.type = 'text/javascript';
-		codeScript.text = code;
+		testsScript.type = 'text/javascript';
+		testsScript.text = tests;
 		document.body.appendChild(testsScript);
 
 		execJasmine();
