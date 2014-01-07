@@ -61,6 +61,17 @@ var app = app || {};
 		======================================================
 	*/
 
+	//Create save and load functions
+	var saveContentToCookie = function() {
+		app.cookie.set(activeCookie, { code: $('#userCode').val(), tests: $('#userTests').val()}, 1000);
+		app.cookie.set(app.activeCookieName, activeCookie, 1000);
+	};
+	var loadContentFromCookie = function() {
+		var cookie = app.cookie.get(activeCookie);
+		$('#userCode').val(cookie.code);
+		$('#userTests').val(cookie.tests);
+	};
+
 	//Bind the toggle button
 	$('#toggleCookies').click(function() { $('#cookieContainer').slideToggle(); } );
 
@@ -120,16 +131,6 @@ var app = app || {};
 		loadContentFromCookie();
 	});
 
-	var saveContentToCookie = function() {
-		app.cookie.set(activeCookie, { code: $('#userCode').val(), tests: $('#userTests').val()}, 1000);
-		app.cookie.set(app.activeCookieName, activeCookie, 1000);
-	};
-
-	var loadContentFromCookie = function() {
-		var cookie = app.cookie.get(activeCookie);
-		$('#userCode').val(cookie.code);
-		$('#userTests').val(cookie.tests);
-	};
 
 	/*
 		Setup Test Runner
