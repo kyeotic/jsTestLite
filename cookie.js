@@ -29,28 +29,28 @@ app.cookie = (function(){
         return null;
       };
 
-      var remove = function (name) {
-        set(name, "", -1);
-      };
+	var remove = function (name) {
+		set(name, "", -1);
+	};
 
-      var list = function (exclude) {
-      	var result = [],
-					cookies = document.cookie.split(';'),
-          exclude = exclude || [];
-        if (!(exclude instanceof Array))
-          exclude = [exclude];
-				for (var i = 0 ; i < cookies.length; i++) {
-          var cookie = cookies[i].split('=')[0];
-          if (exclude.indexOf(cookie) === -1)
-					 result.push(cookie);
-				}						
-				return result;
-      };
+	var list = function (exclude) {
+		var result = [],
+			cookies = document.cookie.split(';'),
+		exclude = exclude || [];
+		if (!(exclude instanceof Array))
+			exclude = [exclude];
+		for (var i = 0 ; i < cookies.length; i++) {
+			var cookie = cookies[i].split('=')[0];
+			if (exclude.indexOf(cookie) === -1)
+				result.push(cookie);
+			}						
+		return result;
+	};
       
-      return {
-        set: set,
-        get: get,
-        remove: remove,
-        list: list
-      };
+	return {
+		set: set,
+		get: get,
+		remove: remove,
+		list: list
+	};
 })();
