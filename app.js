@@ -53,5 +53,5 @@
 	    rerunTests();
 	});
 
-	$('#codeClear').click(function() { $('textarea').val(''); });
+	$('#codeClear').click(function() { $('textarea').val(''); rerunTests(); });
 })();
