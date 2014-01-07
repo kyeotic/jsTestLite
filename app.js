@@ -47,9 +47,10 @@
 	$('#codeExample').click(function() {
 	    var examples = $('#examples').contents().filter(function() { return this.nodeType === 8; }),
 	        codeExample = examples.get(0).nodeValue.trim(),
-	        testExample = examples.get(1).nodeValue.trim(); 
+	        testExample = examples.get(1).nodeValue.trim();
 	    $('#userCode').val(codeExample);
-	    $('#userTests').val(testExample); 
+	    $('#userTests').val(testExample);
+	    rerunTests();
 	});
 
 	$('#codeClear').click(function() { $('textarea').val(''); });
