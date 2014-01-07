@@ -23,11 +23,11 @@
 
 		codeScript.type = 'text/javascript';
 		codeScript.text = code;
-		testFrameBody.appendChild(codeScript);
+		document.body.appendChild(codeScript);
 		
 		codeScript.type = 'text/javascript';
 		codeScript.text = code;
-		testFrameBody.appendChild(testsScript);
+		document.body.appendChild(testsScript);
 
 		execJasmine();
 	};
