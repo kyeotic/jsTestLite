@@ -94,7 +94,7 @@ describe("Example tests", function() {
 			<div class="col-md-12">
 				<h1>Storage
 				<span>
-				<button class="btn btn-default" data-bind="click: showingStorage(!showingStoring())">Toggle</button>
+				<button class="btn btn-default" data-bind="click: showingStorage(!showingStorage())">Toggle</button>
 				</span>
 				</h1>
 			</div>
@@ -109,7 +109,7 @@ describe("Example tests", function() {
 			</div>
 			<div class="col-md-4">
 					<label for="cookieList">Cookies</label>
-					<select id="cookieList" data-bind="options: cookies, optionsText: 'name', value: selectedCookie"></select>
+					<select id="cookieList" data-bind="options: cookies, optionsText: 'name', value: activeCookie"></select>
 					<button class="btn btn-sm btn-danger" data-bind="click: deleteCookie">Delete</button>
 			</div>
 		</div>
