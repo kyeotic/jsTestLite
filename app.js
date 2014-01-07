@@ -31,7 +31,7 @@
 		window.frames[0].__testScript = $('#userTests').val();
 	};
 	
-	$('textarea').keyup($.debounce(testDebounce, rerunTests ));
+	$('textarea').keyup($.debounce(defaults.testDebounce, rerunTests ));
 	
 	$('#codeSmall').click(function() { setTextAreaRows(defaults.codeSmall); });
 	$('#codeMedium').click(function() { setTextAreaRows(defaults.codeMedium); });
