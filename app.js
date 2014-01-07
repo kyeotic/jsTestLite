@@ -28,9 +28,7 @@
 	frame.__testScript = tests;
   };
   
-  $('textarea').keyup(function() { rerunTests(); });
-  
-  
+  $('textarea').keyup($.debounce( 500, rerunTests ));
   
 	$('#codeSmall').click(function() { setTextAreaRows(13); });
 	$('#codeMedium').click(function() { setTextAreaRows(21); });
