@@ -30,9 +30,7 @@
 		testFrameBody.appendChild(runnerScript);
 	};
 	
-	$('textarea').focus(function() {
-		$(this).keyup(function() {
-			rerunTests();
-		});
+	$('textarea').keyup(function() {
+		rerunTests();
 	});
 })();
