@@ -52,7 +52,6 @@ var app = app || {};
 
 		self.loadExample = function() {
 			self.setContent(config.codeExample, config.testsExample);
-			self.runTests();
 		};
 
 		self.saveContentToCookie = function(cookieName) {
@@ -81,13 +80,14 @@ var app = app || {};
 		};
 
 		self.activeCookie.subscribe(function(newValue) {
-			var cookie = app.cookie.get(self.activeCookie());
+			var cookie = app.cookie.get(newValue);
 			//Cookie exists, load it
 			if (cookie){
 				self.codeContent(cookie.code);
 				self.testsContent(cookie.tests);
 			//Cookie is new, save it
 			} else {
+				self.cookies.push(newValue);
 				self.saveContentToCookie();
 			}
 		});
@@ -124,8 +124,6 @@ var app = app || {};
 				self.clearContent();
 				self.activeCookie(defaults.cookieName); //Will cause a save to happen
 			}
-
-			runTests();
 		};
 	};
 
