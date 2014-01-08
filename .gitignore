@@ -17,3 +17,7 @@ npm-debug.log
 
 *.sublime-project
 *.sublime-workspace
+
+app_modules
+node_modules
+server.js
