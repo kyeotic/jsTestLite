@@ -28,6 +28,8 @@ var app = app || {};
 		self.activeCookie = ko.observable();
 		self.cookies = ko.observableArray();
 
+		self.toggleStorage = function() { self.showingStorage(!self.showingStorage()); };
+
 		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); };
 		self.setContentMedium = function() { self.codeSize(defaults.codeMedium); };
 		self.setContentLarge = function() { self.codeSize(defaults.codeLarge); };
