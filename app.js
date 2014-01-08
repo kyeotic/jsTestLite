@@ -57,8 +57,8 @@ var app = app || {};
 		self.saveContentToCookie = function(cookieName) {
 			cookieName = cookieName || self.activeCookie();
 			//Ensure something gets written so we have a valid extraction
-			app.cookie.set(self.activeCookie(), { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, 1000);
-			app.cookie.set(app.activeCookieName, { name: self.activeCookie() }, 1000);
+			app.cookie.set(cookieName, { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, 1000);
+			app.cookie.set(app.activeCookieName, { name: cookieName }, 1000);
 		};
 
 		self.saveCookie = function() {
@@ -80,6 +80,8 @@ var app = app || {};
 		};
 
 		self.activeCookie.subscribe(function(newValue) {
+			if (!newValue)
+				return;
 			var cookie = app.cookie.get(newValue);
 			//Cookie exists, load it
 			if (cookie){
