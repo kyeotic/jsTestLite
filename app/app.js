@@ -116,18 +116,19 @@ app.activeTestKey = '__activeTest';
 		self.testsContent.subscribe(runTests);
 
 		//Init
+		if (app.storage.isLocalStorageSupported) {
+			//load the savedTestslist , ifnore the activeTest
+			self.savedTests(app.storage.list(app.activeTestKey));
 
-		//load the savedTestslist , ifnore the activeTest
-		self.savedTests(app.storage.list(app.activeTestKey));
-
-		//load the active test, if present
-		var activeTest = app.storage.get(app.activeTestKey);
-		if (activeTest)
-			self.activeTest(activeTest);
-		else {
-			self.clearContent();
-			self.activeTest(defaults.testName); //Will cause a save to happen
-		}
+			//load the active test, if present
+			var activeTest = app.storage.get(app.activeTestKey);
+			if (activeTest)
+				self.activeTest(activeTest);
+			else {
+				self.clearContent();
+				self.activeTest(defaults.testName); //Will cause a save to happen
+			}
+		}		
 	};
 
 	//Init Tab-Override
