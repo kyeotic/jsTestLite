@@ -110,25 +110,26 @@ var app = app || {};
 		self.codeContent.subscribe(runTests);
 		self.testsContent.subscribe(runTests);
 
-		//Start It up
-		self.init = function() {
-			//Init Tab-Override
-			$('textarea').tabOverride();
 
-			//load the cookieslist , ifnore the activeCookie
-			self.cookies(app.cookie.list(app.activeCookieName));
+		//Init
 
-			//load the active cookie, if present
-			var activeCookie = app.cookie.get(app.activeCookieName);
-			if (activeCookie)
-				self.activeCookie(activeCookie);
-			else {
-				self.clearContent();
-				self.activeCookie(defaults.cookieName); //Will cause a save to happen
-			}
-		};
+		//load the cookieslist , ifnore the activeCookie
+		self.cookies(app.cookie.list(app.activeCookieName));
+
+		//load the active cookie, if present
+		var activeCookie = app.cookie.get(app.activeCookieName);
+		if (activeCookie)
+			self.activeCookie(activeCookie);
+		else {
+			self.clearContent();
+			self.activeCookie(defaults.cookieName); //Will cause a save to happen
+		}
 	};
 
+	//Init Tab-Override
+	$('textarea').tabOverride();
+
+	//Pull the examples out of the HTML (they just look nicer there, I know it's odd)
 	var examples = $('#examples').contents().filter(function() { return this.nodeType === 8; }),
         codeExample = examples.get(0).nodeValue.trim(),
         testExample = examples.get(1).nodeValue.trim();
@@ -140,6 +141,6 @@ var app = app || {};
 	});
 
 	ko.applyBindings(vm);
-	vm.init();
+	//vm.init();
 
 })(jQuery, ko);
