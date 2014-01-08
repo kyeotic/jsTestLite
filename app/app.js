@@ -1,4 +1,5 @@
 var app = app || {};
+app.activeTestKey = '__activeTest';
 
 (function($, ko) {
 	var defaults = {
@@ -9,8 +10,7 @@ var app = app || {};
 		testMedium: 320,
 		testLarge: 550,
 		testDebounce: 500,
-		cookieName: 'Default',
-		cookieSaveTimeDays: 300
+		testName: 'Default'
 	};
 
 	var ViewModel = function(config) {
@@ -22,13 +22,11 @@ var app = app || {};
 
 		self.codeSize = ko.observable(defaults.codeSmall);
 
-		self.showingStorage = ko.observable(false);
+		self.showingStorage = ko.observable(app.storage.isLocalStorageSupported);
 
-		self.newCookieName = ko.observable('');
-		self.activeCookie = ko.observable();
-		self.cookies = ko.observableArray();
-
-		self.toggleStorage = function() { self.showingStorage(!self.showingStorage()); };
+		self.newTestName = ko.observable('');
+		self.activeTest = ko.observable();
+		self.savedTests = ko.observableArray();
 
 		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); };
 		self.setContentMedium = function() { self.codeSize(defaults.codeMedium); };
@@ -57,59 +55,52 @@ var app = app || {};
 			self.setContent(config.codeExample, config.testsExample);
 		};
 
-		self.saveContentToCookie = function(cookieName) {
-			cookieName = cookieName || self.activeCookie();
+		self.saveContentToStorage = function(testName) {
+			testName = testName || self.activeTest();
 			//Ensure something gets written so we have a valid extraction
+			var test = { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' };
 
-			var encodingMethod = 'encodeURIComponent';
-			var cookie = { code: window[encodingMethod](self.codeContent() || ' '), tests: window[encodingMethod](self.testsContent() || ' ') };
-
-			if (cookie.code.indexOf(';') !== -1 || cookie.tests.indexOf(';') !== -1) {
-				debugger;
-				console.log(cookie);
-			}
-
-			app.cookie.set(cookieName, cookie, defaults.cookieSaveTimeDays);
-			app.cookie.set(app.activeCookieName, { name: cookieName }, defaults.cookieSaveTimeDays);
+			app.storage.setJSON(testName, test);
+			app.storage.set(app.activeTestKey, testName);
 		};
 
-		self.saveCookie = function() {
-			if (self.newCookieName().length < 1)
+		self.saveNewTest = function() {
+			if (self.newTestName().length < 1)
 				return;
-			self.saveContentToCookie(self.newCookieName());
-			self.cookies.push(self.newCookieName());
-			self.activeCookie(self.newCookieName());
-			self.newCookieName('');
+			self.saveContentToStorage(self.newTestName());
+			self.savedTests.push(self.newTestName());
+			self.activeTest(self.newTestName());
+			self.newTestName('');
 		};
 
-		self.deleteCookie = function() {
-			app.cookie.remove(self.activeCookie());
-			self.cookies.remove(self.activeCookie());
+		self.deleteTest = function() {
+			app.storage.remove(self.activeTest());
+			self.savedTests.remove(self.activeTest());
 
-			//If that was the last cookie, make a new default one
-			if (self.cookies().length === 0)
-				self.cookies.push(defaults.cookieName);
+			//If that was the last test, make a new default one
+			if (self.savedTests().length === 0)
+				self.savedTests.push(defaults.testName);
 			else
-				self.activeCookie(self.cookies()[0]);
+				self.activeTest(self.savedTests()[0]);
 		};
 
-		self.activeCookie.subscribe(function(newValue) {
+		self.activeTest.subscribe(function(newValue) {
 			if (!newValue)
 				return;
-			var cookie = app.cookie.get(newValue);
-			//Cookie exists, load it
-			if (cookie){
-				self.codeContent(unescape(cookie.code));
-				self.testsContent(unescape(cookie.tests));
-			//Cookie is new, save it
+			var test = app.storage.getJSON(newValue);
+			//test exists, load it
+			if (test){
+				self.codeContent(test.code);
+				self.testsContent(test.tests);
+			//test is new, save it
 			} else {
-				self.cookies.push(newValue);
-				self.saveContentToCookie();
+				self.savedTests.push(newValue);
+				self.saveContentToStorage();
 			}
 		});
 
 		var runTests = $.debounce(defaults.testDebounce, function() {
-			var testFrame = $('<iframe id="testFrame" src="runner.html"></iframe>');
+			var testFrame = $('<iframe id="testFrame" src="app/runner.html"></iframe>');
 		
 			//Reset the test frame, using the existing height
 			$('#' + config.testHost).empty().append(testFrame);
@@ -118,7 +109,7 @@ var app = app || {};
 			window.frames[0].__codeScript = self.codeContent();
 			window.frames[0].__testScript = self.testsContent();
 
-			self.saveContentToCookie();
+			self.saveContentToStorage();
 		});
 
 		self.codeContent.subscribe(runTests);
@@ -126,16 +117,16 @@ var app = app || {};
 
 		//Init
 
-		//load the cookieslist , ifnore the activeCookie
-		self.cookies(app.cookie.list(app.activeCookieName));
+		//load the savedTestslist , ifnore the activeTest
+		self.savedTests(app.storage.list(app.activeTestKey));
 
-		//load the active cookie, if present
-		var activeCookie = app.cookie.get(app.activeCookieName);
-		if (activeCookie)
-			self.activeCookie(activeCookie.name);
+		//load the active test, if present
+		var activeTest = app.storage.get(app.activeTestKey);
+		if (activeTest)
+			self.activeTest(activeTest);
 		else {
 			self.clearContent();
-			self.activeCookie(defaults.cookieName); //Will cause a save to happen
+			self.activeTest(defaults.testName); //Will cause a save to happen
 		}
 	};
 

@@ -11,7 +11,7 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 
-	<link rel="stylesheet" href="app.css">
+	<link rel="stylesheet" href="app/app.css">
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="lib/jquery-throttle.js"></script>
 	<script type="text/javascript" src="lib/tab-override.js"></script>
@@ -90,27 +90,24 @@ describe("Example tests", function() {
 		
 		<div id="testHost"></div>
 
-		<div class="row">
+		<div class="row" data-bind="visible: showingStorage">
 			<div class="col-md-12">
-				<h1>Storage
-				<span>
-				<button class="btn btn-default" data-bind="click: toggleStorage">Toggle</button>
-				</span>
-				</h1>
+				<h1>Storage</h1>
 			</div>
 		</div>
 		<div class="row" data-bind="visible: showingStorage">
 			<div class="col-md-4">
-				<form data-bind="submit: saveCookie">
-					<label for="cookieName">New Cookie</label>
-					<input type="text" id="cookieName" data-bind="value: newCookieName">
+				<form data-bind="submit: saveNewTest">
+					<label for="testName">New Test</label>
+					<input type="text" id="testName" data-bind="value: newTestName">
 					<button class="btn btn-sm btn-primary" type="submit">Save</button>
 				</form>				
 			</div>
-			<div class="col-md-4">
-					<label for="cookieList">Cookies</label>
-					<select id="cookieList" data-bind="options: cookies, value: activeCookie"></select>
-					<button class="btn btn-sm btn-danger" data-bind="click: deleteCookie">Delete</button>
+			<div class="col-md-8">
+					<label for="testList">Tests</label>
+					<select id="testList" data-bind="options: savedTests, value: activeTest"></select>
+					<button class="btn btn-sm btn-danger" data-bind="click: deleteTest">Delete</button>
+					<small class="text-info">If you delete your last test, the default will be re-created.</small>
 			</div>
 		</div>
 		
@@ -133,7 +130,7 @@ describe("Example tests", function() {
 		</div>
 	</div>
 
-	<script type="text/javascript" src="cookie.js"></script>
-	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="app/storage.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
 </body>
 </html>
