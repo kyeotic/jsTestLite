@@ -62,6 +62,8 @@ var app = app || {};
 		};
 
 		self.saveCookie = function() {
+			if (self.newCookieName().length < 1)
+				return;
 			self.saveContentToCookie(self.newCookieName());
 			self.cookies.push(self.newCookieName());
 			self.activeCookie(self.newCookieName());
