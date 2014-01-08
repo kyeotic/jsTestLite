@@ -24,7 +24,7 @@ var app = app || {};
 		self.showingStorage = ko.observable(false);
 
 		self.newCookieName = ko.observable('');
-		self.activeCookie = ko.observable(defaults.cookieName);
+		self.activeCookie = ko.observable();
 		self.cookies = ko.observableArray();
 
 		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); };
@@ -69,12 +69,6 @@ var app = app || {};
 			self.newCookieName('');
 		};
 
-		self.loadContentFromCookie = function() {
-			var cookie = app.cookie.get(self.activeCookie());
-			self.codeContent(cookie.code);
-			self.testsContent(cookie.tests);
-		};
-
 		self.deleteCookie = function() {
 			app.cookie.remove(self.activeCookie());
 			self.cookies.remove(self.activeCookie());
@@ -87,7 +81,15 @@ var app = app || {};
 		};
 
 		self.activeCookie.subscribe(function(newValue) {
-			self.loadContentFromCookie();
+			var cookie = app.cookie.get(self.activeCookie());
+			//Cookie exists, load it
+			if (cookie){
+				self.codeContent(cookie.code);
+				self.testsContent(cookie.tests);
+			//Cookie is new, save it
+			} else {
+				self.saveContentToCookie();
+			}
 		});
 
 		var runTests = $.debounce(defaults.testDebounce, function() {
@@ -118,8 +120,10 @@ var app = app || {};
 			var activeCookie = app.cookie.get(app.activeCookieName);
 			if (activeCookie)
 				self.activeCookie(activeCookie);
-			else
+			else {
 				self.clearContent();
+				self.activeCookie(defaults.cookieName); //Will cause a save to happen
+			}
 
 			runTests();
 		};
