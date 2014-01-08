@@ -9,7 +9,8 @@ var app = app || {};
 		testMedium: 320,
 		testLarge: 550,
 		testDebounce: 500,
-		cookieName: 'Default'
+		cookieName: 'Default',
+		cookieSaveTimeDays: 300
 	};
 
 	var ViewModel = function(config) {
@@ -57,8 +58,8 @@ var app = app || {};
 		self.saveContentToCookie = function(cookieName) {
 			cookieName = cookieName || self.activeCookie();
 			//Ensure something gets written so we have a valid extraction
-			app.cookie.set(cookieName, { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, 1000);
-			app.cookie.set(app.activeCookieName, { name: cookieName }, 1000);
+			app.cookie.set(cookieName, { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, defaults.cookieSaveTimeDays);
+			app.cookie.set(app.activeCookieName, { name: cookieName }, defaults.cookieSaveTimeDays);
 		};
 
 		self.saveCookie = function() {
@@ -111,7 +112,6 @@ var app = app || {};
 
 		self.codeContent.subscribe(runTests);
 		self.testsContent.subscribe(runTests);
-
 
 		//Init
 
