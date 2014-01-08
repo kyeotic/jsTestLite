@@ -60,7 +60,16 @@ var app = app || {};
 		self.saveContentToCookie = function(cookieName) {
 			cookieName = cookieName || self.activeCookie();
 			//Ensure something gets written so we have a valid extraction
-			app.cookie.set(cookieName, { code: self.codeContent() || ' ', tests: self.testsContent() || ' ' }, defaults.cookieSaveTimeDays);
+
+			var encodingMethod = 'encodeURIComponent';
+			var cookie = { code: window[encodingMethod](self.codeContent() || ' '), tests: window[encodingMethod](self.testsContent() || ' ') };
+
+			if (cookie.code.indexOf(';') !== -1 || cookie.tests.indexOf(';') !== -1) {
+				debugger;
+				console.log(cookie);
+			}
+
+			app.cookie.set(cookieName, cookie, defaults.cookieSaveTimeDays);
 			app.cookie.set(app.activeCookieName, { name: cookieName }, defaults.cookieSaveTimeDays);
 		};
 
@@ -90,8 +99,8 @@ var app = app || {};
 			var cookie = app.cookie.get(newValue);
 			//Cookie exists, load it
 			if (cookie){
-				self.codeContent(cookie.code);
-				self.testsContent(cookie.tests);
+				self.codeContent(unescape(cookie.code));
+				self.testsContent(unescape(cookie.tests));
 			//Cookie is new, save it
 			} else {
 				self.cookies.push(newValue);

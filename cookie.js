@@ -11,7 +11,7 @@ app.cookie = (function(){
         else {
         	expires = "";
         }
-        document.cookie = name + "=" + escape(JSON.stringify(value)) + expires + "; path=/";
+        document.cookie = name + "=" + encodeURIComponent(JSON.stringify(value)) + expires + "; path=/";
       };
 
       var get = function (name) {
@@ -23,7 +23,7 @@ app.cookie = (function(){
             c = c.substring(1, c.length);
           }
           if (c.indexOf(nameEQ) == 0) {
-            return JSON.parse(unescape(c.substring(nameEQ.length, c.length)));
+            return JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
           }
         }
         return null;
