@@ -121,7 +121,7 @@ var app = app || {};
 		//load the active cookie, if present
 		var activeCookie = app.cookie.get(app.activeCookieName);
 		if (activeCookie)
-			self.activeCookie(activeCookie);
+			self.activeCookie(activeCookie.name);
 		else {
 			self.clearContent();
 			self.activeCookie(defaults.cookieName); //Will cause a save to happen
