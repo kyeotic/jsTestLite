@@ -1,5 +1,8 @@
 var app = app || {};
 app.activeTestKey = '__activeTest';
+app.aceThemeKey = 'aceTheme';
+app.codeSizeKey = 'codeSize';
+app.keyExcludes = [app.activeTestKey, app.aceThemeKey, app.codeSizeKey, app.codeSizeKey];
 
 (function($, ko) {
 	var defaults = {
@@ -31,9 +34,15 @@ app.activeTestKey = '__activeTest';
 		self.activeTest = ko.observable();
 		self.savedTests = ko.observableArray();
 
-		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); ko.aceEditors.resizeAll(); };
-		self.setContentMedium = function() { self.codeSize(defaults.codeMedium); ko.aceEditors.resizeAll(); };
-		self.setContentLarge = function() { self.codeSize(defaults.codeLarge); ko.aceEditors.resizeAll(); };
+		var setSize = function(size) {
+			self.codeSize(size);
+			ko.aceEditors.resizeAll();
+			app.storage.set(app.codeSizeKey, size);
+		}
+
+		self.setContentSmall = function() { setSize(defaults.codeSmall); };
+		self.setContentMedium = function() { setSize(defaults.codeMedium); };
+		self.setContentLarge = function() { setSize(defaults.codeLarge); };
 
 		var testFrameHeight = defaults.testSmall;
 		var setTestFrameHeight = function(size) {
@@ -121,7 +130,7 @@ app.activeTestKey = '__activeTest';
 		//Init
 		if (app.storage.isLocalStorageSupported) {
 			//load the savedTestslist , ifnore the activeTest
-			self.savedTests(app.storage.list(app.activeTestKey));
+			self.savedTests(app.storage.list(app.keyExcludes));
 
 			//load the active test, if present
 			var activeTest = app.storage.get(app.activeTestKey);
@@ -132,12 +141,16 @@ app.activeTestKey = '__activeTest';
 				self.activeTest(defaults.testName); //Will cause a save to happen
 			}
 
-			var aceTheme = app.storage.get('aceTheme');
+			var aceTheme = app.storage.get(app.aceThemeKey);
 			if (aceTheme)
 				self.aceTheme(aceTheme);
 
 			//Save any changes
-			self.aceTheme.subscribe(function (newValue) { app.storage.set('aceTheme', newValue); });
+			self.aceTheme.subscribe(function (newValue) { app.storage.set(app.aceThemeKey, newValue); });
+
+			var codeSize = app.storage.get(app.codeSizeKey);
+			if (codeSize)
+				setSize(codeSize);
 		}
 
 		var aceReload = function() {
