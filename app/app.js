@@ -159,9 +159,6 @@ app.keyExcludes = [app.activeTestKey, app.aceThemeKey, app.codeSizeKey, app.code
 		self.aceTheme.subscribe(function() { aceReload(); });
 	};
 
-	//Init Tab-Override
-	$('textarea').tabOverride();
-
 	//Pull the examples out of the HTML (they just look nicer there, I know it's odd)
 	var examples = $('#examples').contents().filter(function() { return this.nodeType === 8; }),
         codeExample = examples.get(0).nodeValue.trim(),
