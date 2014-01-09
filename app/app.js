@@ -3,14 +3,15 @@ app.activeTestKey = '__activeTest';
 
 (function($, ko) {
 	var defaults = {
-		codeSmall: 13,
-		codeMedium: 21,
-		codeLarge: 30,
+		codeSmall: 'small',
+		codeMedium: 'medium',
+		codeLarge: 'large',
 		testSmall: 160,
 		testMedium: 320,
 		testLarge: 550,
 		testDebounce: 500,
-		testName: 'Default'
+		testName: 'Default',
+		aceTheme: 'chrome'
 	};
 
 	var ViewModel = function(config) {
@@ -21,6 +22,8 @@ app.activeTestKey = '__activeTest';
 		self.testsContent = ko.observable('');
 
 		self.codeSize = ko.observable(defaults.codeSmall);
+		self.aceTheme = ko.observable(defaults.aceTheme);
+		self.aceThemes = ko.observableArray(app.aceThemes);
 
 		self.showingStorage = ko.observable(app.storage.isLocalStorageSupported);
 
@@ -128,7 +131,19 @@ app.activeTestKey = '__activeTest';
 				self.clearContent();
 				self.activeTest(defaults.testName); //Will cause a save to happen
 			}
-		}		
+
+			var aceTheme = app.storage.get('aceTheme');
+			if (aceTheme)
+				self.aceTheme(aceTheme);
+
+			//Save any changes
+			self.aceTheme.subscribe(function (newValue) { app.storage.set('aceTheme', newValue); });
+		}
+
+		var aceReload = function() {
+			 window.location.reload(false);
+		};
+		self.aceTheme.subscribe(function() { aceReload(); });
 	};
 
 	//Init Tab-Override

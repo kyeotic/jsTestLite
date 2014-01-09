@@ -6,3 +6,19 @@ iframe {
 #testHost {
   background-color: #eeeeee;
 }
+
+.editor {
+	height: inherit;
+	width: inherit;
+}
+
+.editor-controls {
+	margin-top: 1em;
+}
+
+.inline { display: inline !important;}
+
+.editor-container { width: 95%; }
+.editor-container[data-size="small"] { height: 278; }
+.editor-container[data-size="medium"] { height: 438; }
+.editor-container[data-size="large"] { height: 618; }

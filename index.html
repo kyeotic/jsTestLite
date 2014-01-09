@@ -17,11 +17,13 @@
 	<script type="text/javascript" src="lib/tab-override.js"></script>
 	<script type="text/javascript" src="lib/tab-override-jquery.js"></script>
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>				
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
+	<script type="text/javascript" src="lib/ace/ace.js"></script>
+	<script type="text/javascript" src="lib/knockout-ace.js"></script>
 </head>
 <body style="">
 	<div id="applicationHost" class="container">
-	<div class="hidden" id="examples">
+		<div class="hidden" id="examples">
 <!--
 var tests = {
 	 name: 'example',
@@ -55,18 +57,31 @@ describe("Example tests", function() {
 	});
 });
 -->
-  </div>
+  		</div>
+  		<div class="container">
+  			<ul class="nav navbar-nav pull-right editor-controls">
+				<li>
+					<label for="themeSelect">Theme</label>
+				<select id="themeSelect" data-bind="options: aceThemes, value: aceTheme"></select>
+				</li>
+				<li>
+					<label>Editor Size</label>
+					<div class="btn-group">
+						<button class="btn btn-sm btn-default" data-bind="click: setContentSmall">Small</button>
+						<button class="btn btn-sm btn-default" data-bind="click: setContentMedium">Medium</button>
+						<button class="btn btn-sm btn-default" data-bind="click: setContentLarge">Large</button>
+					</div>
+				</li>
+			</ul>
+  		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<h1>
 					Code
-					<span class="pull-right">
-						<button class="btn btn-default" data-bind="click: setContentSmall">Small</button>
-						<button class="btn btn-default" data-bind="click: setContentMedium">Medium</button>
-						<button class="btn btn-default" data-bind="click: setContentLarge">Large</button>
-					</span>
 				</h1>
-				<textarea class="form-control" data-bind="value: codeContent, valueUpdate: 'afterkeydown', attr: { rows: codeSize }"></textarea>
+				<div class="editor-container" data-bind="attr: { 'data-size': codeSize }">
+					<div class="editor" data-bind=" ace: codeContent, aceOptions: { mode: 'javascript', theme: aceTheme() }"></div>
+				</div>
 			</div>
 			<div class="col-md-6">
 				<h1>Tests
@@ -75,7 +90,9 @@ describe("Example tests", function() {
 						<button class="btn btn-danger" data-bind="click: clearContent">Clear</button>
 					</span>
 				</h1>
-				<textarea class="form-control" data-bind="value: testsContent, valueUpdate: 'afterkeydown', attr: { rows: codeSize }"></textarea>
+				<div class="editor-container" data-bind="attr: { 'data-size': codeSize }">
+					<div class="editor" data-bind=" ace: testsContent, aceOptions: { mode: 'javascript', theme: aceTheme() }"></div>
+				</div>
 			</div>
 		</div>
 		
@@ -131,6 +148,7 @@ describe("Example tests", function() {
 	</div>
 
 	<script type="text/javascript" src="app/storage.js"></script>
+	<script type="text/javascript" src="app/aceThemes.js"></script>
 	<script type="text/javascript" src="app/app.js"></script>
 </body>
 </html>
