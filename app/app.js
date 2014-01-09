@@ -31,9 +31,9 @@ app.activeTestKey = '__activeTest';
 		self.activeTest = ko.observable();
 		self.savedTests = ko.observableArray();
 
-		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); };
-		self.setContentMedium = function() { self.codeSize(defaults.codeMedium); };
-		self.setContentLarge = function() { self.codeSize(defaults.codeLarge); };
+		self.setContentSmall = function() { self.codeSize(defaults.codeSmall); ko.aceEditors.resizeAll(); };
+		self.setContentMedium = function() { self.codeSize(defaults.codeMedium); ko.aceEditors.resizeAll(); };
+		self.setContentLarge = function() { self.codeSize(defaults.codeLarge); ko.aceEditors.resizeAll(); };
 
 		var testFrameHeight = defaults.testSmall;
 		var setTestFrameHeight = function(size) {
@@ -141,7 +141,7 @@ app.activeTestKey = '__activeTest';
 		}
 
 		var aceReload = function() {
-			 window.location.reload(false);
+			//window.location.reload(false);
 		};
 		self.aceTheme.subscribe(function() { aceReload(); });
 	};

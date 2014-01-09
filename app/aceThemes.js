@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.aceThemes = [
-	'ambiamce',
+	'ambiance',
 	'chrome',
 	'clouds',
 	'clouds_midnight',
@@ -12,7 +12,6 @@ app.aceThemes = [
 	'eclipse',
 	'github',
 	'idle_fingers',
-	'kr',
 	'merbivore',
 	'merbivore_soft',
 	'mono_industrial',
