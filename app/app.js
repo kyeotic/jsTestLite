@@ -21,6 +21,8 @@ app.keyExcludes = [app.activeTestKey, app.aceThemeKey, app.codeSizeKey, app.code
 		var self = this
 			config = config || {};
 
+		self.testFrame;
+
 		self.codeContent = ko.observable('');
 		self.testsContent = ko.observable('');
 
@@ -47,7 +49,7 @@ app.keyExcludes = [app.activeTestKey, app.aceThemeKey, app.codeSizeKey, app.code
 		var testFrameHeight = defaults.testSmall;
 		var setTestFrameHeight = function(size) {
 			testFrameHeight = size;
-			$('iframe').height(size);
+			self.$testFrame.height(size);
 		};
 
 		self.setResultsSmall = function() { setTestFrameHeight(defaults.testSmall); };
@@ -112,14 +114,15 @@ app.keyExcludes = [app.activeTestKey, app.aceThemeKey, app.codeSizeKey, app.code
 		});
 
 		var runTests = $.debounce(defaults.testDebounce, function() {
-			var testFrame = $('<iframe id="testFrame" src="app/runner.html"></iframe>');
+			self.$testFrame = $('<iframe id="testFrame" src="app/runner.html"></iframe>');
+			self.testFrame = self.$testFrame[0];
 		
 			//Reset the test frame, using the existing height
-			$('#' + config.testHost).empty().append(testFrame);
+			$('#' + config.testHost).empty().append(self.$testFrame);
 			setTestFrameHeight(testFrameHeight);
 
-			window.frames[0].__codeScript = self.codeContent();
-			window.frames[0].__testScript = self.testsContent();
+			self.testFrame.contentWindow.__codeScript = self.codeContent();
+			self.testFrame.contentWindow.__testScript = self.testsContent();
 
 			self.saveContentToStorage();
 		});
